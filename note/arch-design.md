@@ -49,7 +49,7 @@ export default greet;
 import sayHello from './greeting';
 ```
 
-### 5. 创建应用和Web服务器
+### 5. 创建应用和Web服务器 (5/18)
 0. 创建目录结构
 ```yaml
 - src
@@ -85,3 +85,37 @@ npm run start:dev
   }
 }
 ```
+
+### 6. 创建应用和Web服务器 (6/18)
+1. 在nodejs中，我们可以通过`process.env`获取环境变量
+```bash
+# 进入node交互模式
+node
+> process.env.PWD
+> process.env['PWD']
+# 输出
+'/usr/local/share/tools/xb2-node'
+```
+2. 设置环境变量
+```bash
+export NODE_ENV=deployment
+# 再次进入node交互模式
+> process.env.NODE_ENV
+# 输出
+deployment
+```
+3. 通常，我们需要定义多个不同的环境配置文件
+.env
+.env.test
+.env.production
+.env.deployment
+4. 如下，配置了对应环境的`port`和`mysql_user`
+```properties
+APP_PORT=8080
+MYSQL_USER=root
+```
+忽略掉这些文件
+```ignore
+.env*
+```
+
