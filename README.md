@@ -62,3 +62,5 @@ var boolean = intParam == stringParam;
 ```ts
 var boolean = intParam == parseInt(stringParam, 10)
 ```
+
+### Node-js-9-12 智能提示
