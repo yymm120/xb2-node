@@ -143,6 +143,7 @@ app.listen(APP_PORT, () => {})
 ```
 
 ### 10. controller控制器 (10/18)
+接口的处理器我们称为控制器`controller`
 1. 控制器里面的每一个handle方法都用export导出。
 edit `./src/post/post.controller.ts` 
 ```typescript
@@ -208,3 +209,34 @@ export const index = (
   response.send(getPosts());
 }
 ```
+
+### 13-14. middleware (13-14/18)
+1. middleware中间件会在一个请求的过程中有序的执行，它在controller方法之前执行。
+2. 定义一个中间件，让它打印url `consolo.log(url);` 
+**edit** `./src/app/app.middleware.ts`
+
+```typescript
+import { Request, Response , NextFunction } from 'express';
+export const requestURL = (request, response, next) => {
+  console.log(request.url);
+  next();
+}
+```
+> 最后一定要调用`next()`方法，否则会阻塞。
+
+**edit** `./src/post/post.router.ts`
+
+```typescript
+import express from 'express';
+import * as postController from './post.controller';
+import { requestURL } from './app.middleware';
+const router = express.Router()
+/**
+ * 使用中间件middleware
+ */
+router.get("/posts", requestURL, postController.index);
+// 导出router
+export default router;
+```
+3. 执行`start:dev`，请求`/posts`接口，此时会看到终端上打印了`/posts`，说明中间件的`console.log(request.url)`工作正常。
+
