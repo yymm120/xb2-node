@@ -52,3 +52,13 @@ npm install @types/express --save-dev
 import { Request, Response } from 'express';
 var request: Request;
 ```
+
+### Node-js-9-11 typescript检查出来的问题
+1. 在比较运算时，javascript会自动转换类型。
+```javascript
+var boolean = intParam == stringParam;
+```
+但是typescript会给出警告, 利用parseInt将字符串转换为十进制数字。
+```ts
+var boolean = intParam == parseInt(stringParam, 10)
+```
