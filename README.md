@@ -81,3 +81,24 @@ npm install tsc-watch@4.2.5 --save-dev
 ```
 重新编译后，执行`npm start:dev`
 
+### Node-js-9-14 自动排版代码Prettier
+1. 安装`Prettier`包和插件。
+```bash
+npm install prettier@1.19.1 --save-dev --save-exact
+```
+它提供了一个命令行工具，位于`.bin`目录中，我们可以在`package.json`中配置它。
+```json
+{
+  "scripts": {
+    "format": "prettier --write \"src/**/*.ts\""
+  }
+}
+```
+然后，编辑配置文件`prettierrc`
+```json
+{
+  "singleQuote": true,
+  "trailingComma": "all"
+}
+```
+还可以安装插件,名字也叫`prettier`，我们可以通过`ctrl+q`得到配置项的含义。

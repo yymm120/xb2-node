@@ -6,6 +6,7 @@
   "scripts": {
 
     "start:dev": "tsc-watch --onSuccess \"node dist/main.js\"",
+
     "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
