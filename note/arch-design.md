@@ -181,3 +181,30 @@ app.use(postRouter);
 export default app;
 ```
 3. 执行`start:dev`，发送url:http://localhost:8080/posts
+
+### 12. service服务 (12/18)
+1. service服务用来环节controller的压力
+让公共的函数成为一个服务，供controller调用
+**edit** `./src/post/post.service.ts` 
+```typescript
+export const getPosts = () => {
+  // to do and return data
+  return data;
+}
+```
+2. 在`controller`中调用该`service`
+让controller的代码看起来更简洁
+```typescript
+import { Request, Response, NextFunction } from 'express';
+/**
+ * 调用该service
+ */
+import { getPosts } from './post.service';
+export const index = (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  response.send(getPosts());
+}
+```
