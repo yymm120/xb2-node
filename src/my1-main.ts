@@ -1,19 +1,19 @@
+/**
+ * Request Response demo
+ */
+
 import express from 'express';
 import { Request, Response } from 'express';
 const app = express();
-// nodejs 非root用户使用其他端口，会报权限被拒绝的错误。
-const port = 8080;
-
-/**
- * 使用 JSON 中间件
- */
+const port = 3000;
+// Json 中间件
 app.use(express.json());
 
 app.listen(port, () => {
-  console.log('🚀 服务已启动！');
+  console.log('server already running');
 });
 
-app.get('/', (request: Request, response: Response) => {
+app.get('/', (request, response) => {
   response.send('你好');
 });
 
@@ -35,16 +35,19 @@ const data = [
   },
 ];
 
-app.get('/posts', (request: Request, response: Response) => {
+app.get('/posts', (request, response) => {
   response.send(data);
 });
 
-app.get('/posts/:postId', (request: Request, response: Response) => {
-  // 获取内容 ID
+app.get('/posts/:postId', (request, response) => {
+  // 获取内容Id
   const { postId } = request.params;
+  console.log(postId);
+  console.log('request.params', request.params);
 
   // 查找具体内容
-  const posts = data.filter(item => item.id == parseInt(postId, 10));
+  const posts = data.filter(item => item.id == parseInt(postId));
+  console.log(posts);
 
   // 作出响应
   response.send(posts[0]);
@@ -53,17 +56,17 @@ app.get('/posts/:postId', (request: Request, response: Response) => {
 /**
  * 创建内容
  */
-app.post('/posts', (request: Request, response: Response) => {
+app.post('/posts', (request, response) => {
   // 获取请求里的数据
   const { content } = request.body;
 
-  // 设置响应状态码
+  // status code
   response.status(201);
 
-  // 输出请求头部数据
-  console.log(request.headers['sing-along']);
+  // request header
+  console.log(request.header['sing-along']);
 
-  // 设置响应头部数据
+  // response header
   response.set('Sing-Along', 'How I wonder what you are!');
 
   // 作出响应
@@ -71,11 +74,3 @@ app.post('/posts', (request: Request, response: Response) => {
     message: `成功创建了内容：${content}`,
   });
 });
-
-class TestType {
-  constructor(public name: string, public age: string){
-
-  }
-}
-
-var testType = new TestType("name", "age");

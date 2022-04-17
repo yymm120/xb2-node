@@ -14,3 +14,6 @@ exit
 
 tsc 命令
 tsconfig.json 配置项
+
+### Nodejs-9-6 .d.ts
+    tsc命令会生成对应的`.d.ts`文件
