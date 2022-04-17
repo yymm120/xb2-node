@@ -102,3 +102,9 @@ npm install prettier@1.19.1 --save-dev --save-exact
 }
 ```
 还可以安装插件,名字也叫`prettier`，我们可以通过`ctrl+q`得到配置项的含义。
+
+
+### Node-js-9-15  Typescript基础
+E:\code\learn\front-end\learn1-ts0
+note: 笔记/前端/typescript
+
