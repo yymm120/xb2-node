@@ -4,6 +4,7 @@
   "description": "《小白兔的开发之路》演示项目",
   "author": "wanghao <wanghao@ninghao.net>",
   "scripts": {
+
     "start:dev": "tsc-watch --onSuccess \"node dist/main.js\"",
     "format": "prettier --write \"src/**/*.ts\""
   },

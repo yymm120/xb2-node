@@ -64,3 +64,20 @@ var boolean = intParam == parseInt(stringParam, 10)
 ```
 
 ### Node-js-9-12 智能提示
+
+### Node-js-9-13 自动编译与重启
+1. 使用tsc-watch工具
+```bash
+npm install tsc-watch@4.2.5 --save-dev
+```
+这是一个命令行工具，它可以监视项目中文件的变化。
+在package.json中添加如下命令
+```json
+{
+  "scripts": {
+    "start:dev": "tsc-watch --onSuccess \"node dist/main.js\""
+  }
+}
+```
+重新编译后，执行`npm start:dev`
+
