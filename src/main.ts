@@ -1,7 +1,8 @@
 import express from 'express';
 import { Request, Response } from 'express';
 const app = express();
-const port = 3099;
+// nodejs 非root用户使用其他端口，会报权限被拒绝的错误。
+const port = 8080;
 
 /**
  * 使用 JSON 中间件
