@@ -144,10 +144,40 @@ app.listen(APP_PORT, () => {})
 
 ### 10. controller控制器 (10/18)
 1. 控制器里面的每一个handle方法都用export导出。
-
+edit `./src/post/post.controller.ts` 
 ```typescript
 import { Request, Response, NextFunction } from 'express';
 export const index = (request: Request, response: Response, next: NextFunction) => {
   console.log("内容列表接口")
 }
 ```
+
+### 11. router路由 (11/18)
+1. 应用的`router`和`controller`一样, 单独放到每个模块下。
+以放到`post`模块的`router`为例, **edit** `./src/post/post.router.ts` 
+```typescript
+import express from 'express';
+import * as postController from './post.controller';
+const router = express.Router();
+/**
+ * 定义路由接口
+ */
+router.get('/posts', postController.index);
+// 默认导出router
+export default router;
+```
+> 所谓路由，就是一个映射关系，当url的`api`为`/post`时，就映射到`postController.index方法上。
+2. 使用定义好的`router`接口
+**edit** `./src/app/index.ts`文件。
+
+```typescript
+import express from 'express';
+import postRouter from './post.router';
+const app = express();
+/**
+ * 使用路由
+ */
+app.use(postRouter);
+export default app;
+```
+3. 执行`start:dev`，发送url:http://localhost:8080/posts
