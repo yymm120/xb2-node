@@ -240,3 +240,54 @@ export default router;
 ```
 3. 执行`start:dev`，请求`/posts`接口，此时会看到终端上打印了`/posts`，说明中间件的`console.log(request.url)`工作正常。
 
+
+### 15-18 异常处理 (15-18/18)
+1. 异常处理器设计
+异常处理器也是一个中间件，只不过它多了个error参数
+**edit** `./src/app/app.middleware.ts`
+
+```typescript
+import { Request, Response, NextFunction } from 'express';
+export const defaultException = (
+  error: any,
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  let statusCode: number, message: string;
+  switch (error.message){
+    default:
+      statusCode = 500;
+      message = "除了点问题"
+      break;
+  }
+  response.status(statusCode).send(message);
+}
+```
+**edit** `./src/app/index.ts`
+
+```typescript
+import { defaultException } from './app.middleware';
+import express from 'express';
+
+const app = express();
+/**
+ * 使用异常处理器
+ */
+app.use(defaultException);
+// export app
+export default app;
+```
+
+2. 测试异常处理器
+在controller中，判断headers是否符合要求，然后交给异常处理器执行。
+```typescript
+export const index = (request, response, next) => {
+  if (request.headers.authorization !== "SECRET"){
+    // 处理异常
+    return next(new Error());
+  }
+}
+```
+访问`/posts`接口，此时抛出异常信息。
+编辑`headers`， 设置`authorization`为`SECRET`，再次访问`/posts`，正常访问。
