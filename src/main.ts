@@ -1,4 +1,5 @@
 import express from 'express';
+// js标准导入模块的写法
 import { Request, Response } from 'express';
 const app = express();
 // nodejs 非root用户使用其他端口，会报权限被拒绝的错误。

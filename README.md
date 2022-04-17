@@ -26,3 +26,14 @@ tsconfig.json 配置项
 ```bash
 npm install @types/node --save-dev
 ```
+
+### Nodejs-9-8 使用js标准模块系统
+1. 标准导入模块写法
+```ts
+import express from 'express';
+```
+2. tsc会将其转换为nodejs能看懂的写法
+```js
+__importDefault(require("express"));
+```
+
