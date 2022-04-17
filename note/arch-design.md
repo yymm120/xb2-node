@@ -14,7 +14,7 @@ comment
 每个模块都可以添加如下一些组件
 ```bash
 - *.router.ts
-- *.controller.ts
+- *.post.controller.ts
 - *.middleware.ts
 - *.service.ts
 ```
@@ -142,3 +142,12 @@ import app from './index';
 app.listen(APP_PORT, () => {})
 ```
 
+### 10. controller控制器 (10/18)
+1. 控制器里面的每一个handle方法都用export导出。
+
+```typescript
+import { Request, Response, NextFunction } from 'express';
+export const index = (request: Request, response: Response, next: NextFunction) => {
+  console.log("内容列表接口")
+}
+```
