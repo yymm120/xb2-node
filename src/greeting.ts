@@ -1,3 +1,4 @@
-export const greet = (str: string) => {
+const greet = (str: string) => {
   console.log(`${str}`)
 }
+export default greet;

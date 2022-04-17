@@ -36,4 +36,16 @@ export const greet = (str: string) => {
 }
 ```
 
+### 4. 复习Javascript模块 (4/18)
+1. 默认导出
+```ts
+const greet = (str: string) => {
+  console.log(`${str}`)
+}
+export default greet;
+```
+2. 随意命名
+```ts
+import sayHello from './greeting';
+```
 
