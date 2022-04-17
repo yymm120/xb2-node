@@ -45,4 +45,10 @@ npm install @types/express --save-dev
 ```
 另外，idea 的设置中，文件类型设置了忽略node_module文件后，就没有代码提示了。
 
-
+### Nodejs-9-10 设置处理器参数的类型
+1. 设置参数类型不是必须的，typescript会去猜测这个参数的类型，猜不出就认定为any任意类型。
+2. 设置参数类型
+```ts
+import { Request, Response } from 'express';
+var request: Request;
+```

@@ -1,9 +1,11 @@
+// js标准导入模块的写法 import * from '*'
 import express from 'express';
-// js标准导入模块的写法
+// 设置参数类型1. 导入Request, Response类（其实它是一个接口）
 import { Request, Response } from 'express';
 const app = express();
 // nodejs 非root用户使用其他端口，会报权限被拒绝的错误。
 const port = 8080;
+
 
 /**
  * 使用 JSON 中间件
@@ -14,6 +16,7 @@ app.listen(port, () => {
   console.log('🚀 服务已启动！');
 });
 
+// 设置参数类型2. 设置参数的类型(request: Request)
 app.get('/', (request: Request, response: Response) => {
   response.send('你好');
 });
