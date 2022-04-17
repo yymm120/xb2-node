@@ -37,3 +37,12 @@ import express from 'express';
 __importDefault(require("express"));
 ```
 
+### Nodejs-9-9 安装类型定义
+1. 在编辑器中，无法静态的分析express这个框架的类型，无法自动不全和智能提示。
+2. 安装express框架的类型定义。
+```bash
+npm install @types/express --save-dev
+```
+另外，idea 的设置中，文件类型设置了忽略node_module文件后，就没有代码提示了。
+
+
