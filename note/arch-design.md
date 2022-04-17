@@ -49,3 +49,39 @@ export default greet;
 import sayHello from './greeting';
 ```
 
+### 5. 创建应用和Web服务器
+0. 创建目录结构
+```yaml
+- src
+  - app
+  - user
+  - comment
+  - auth
+  - post
+```
+1. 创建应用 `src/app/index.ts`
+```ts
+import express from 'express';
+const application = express();
+export default application;
+```
+2. 监听端口8080 `main.ts`
+```ts
+import app from './app/index'
+
+app.listen(8080, () => {
+  console.log("running");
+})
+```
+3. 运行
+```bash
+npm run start:dev
+```
+注意：前提是配置了`scripts`命令的。
+```json
+{
+  "scripts": {
+    "start:dev": "tsc-watch --onSuccess \"node dist/main.js\""
+  }
+}
+```
