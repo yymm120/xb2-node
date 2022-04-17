@@ -1,3 +1,4 @@
+// ctrl + q 可以查看每个配置项的意思。
 {
   "compilerOptions": {
     "module": "commonjs",
@@ -13,9 +14,11 @@
     "baseUrl": "./",
     "incremental": true
   },
+//  需要编译的文件
   "include": [
     "src/**/*"
   ],
+//  排除编译的文件
   "exclude": [
     "node_modules",
     "dist"
