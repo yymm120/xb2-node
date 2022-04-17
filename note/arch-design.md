@@ -86,7 +86,7 @@ npm run start:dev
 }
 ```
 
-### 6. 创建应用和Web服务器 (6/18)
+### 6-8. 创建应用和Web服务器 (6-8/18)
 1. 在nodejs中，我们可以通过`process.env`获取环境变量
 ```bash
 # 进入node交互模式
@@ -117,5 +117,28 @@ MYSQL_USER=root
 忽略掉这些文件
 ```ignore
 .env*
+```
+
+### 9. 创建应用和Web服务器 (9/18)
+1. 安装`dotenv@8.2.0` 
+```bash
+npm install dotenv@8.2.0 --save-dev
+```
+2. 配置`.env.*`文件
+3. 添加`./src/app/app.config.ts`文件，作为app模块的配置文件
+```typescript
+import dotenv from 'dotenv';
+import * as process from 'process';
+
+dotenv.config();
+export const { APP_PORT, MYSQL_USER } = process.env;
+```
+4. 在`main.ts`中使用环境变量的值
+
+```typescript
+import { APP_PORT } from './src/app/app.config';
+import app from './index';
+
+app.listen(APP_PORT, () => {})
 ```
 
