@@ -1,0 +1,19 @@
+{
+	"Title": "Test Data",
+	"Account": {
+		"T4": [
+			{
+				"sUserEmail": "bdd1@test.com",
+				"sPassword": "123abc",
+				"sUsedFlag": true,
+				"sUserType": "T4"
+			},
+			{
+				"sUserEmail": "bdd2@test.com",
+				"sPassword": "123abc",
+				"sUsedFlag": true,
+				"sUserType": "T4"
+			}
+		]
+	}
+}
