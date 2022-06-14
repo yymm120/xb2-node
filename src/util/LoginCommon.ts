@@ -1,3 +1,5 @@
+import { clearTimeout } from 'timers';
+
 export class AccountType {
   index: number;
   constructor(
@@ -105,7 +107,7 @@ export namespace loginCommon {
     public async lock(delay: number = Locker.delay, timeout: number = Locker.timeout): Promise<boolean> {
       if (this.getStat()) return this.getStat();
       let count = 1, isDebug = this.isDebug, path = this.LOCAL_LOCK_FILE_PATH;
-      setTimeout(() => {
+      let tickId = setTimeout(() => {
         timeout = 0
       }, timeout)
 
@@ -131,6 +133,7 @@ export namespace loginCommon {
       return new Promise((resolve, reject) => {
         mk(resolve, reject, () => {
           this.setStat(true);
+          clearTimeout(tickId);
           return this.getStat();
         });
       })
@@ -147,7 +150,7 @@ export namespace loginCommon {
     public async unlock(delay: number = Locker.delay, timeout: number = Locker.timeout): Promise<boolean> {
       if (!this.getStat()) return !this.getStat();
       let count = 1, isDebug = this.isDebug, path = this.LOCAL_LOCK_FILE_PATH;
-      setTimeout(() => {
+      let tickId = setTimeout(() => {
         timeout = 0
       }, timeout)
 
@@ -174,6 +177,7 @@ export namespace loginCommon {
       return new Promise((resolve, reject) => {
         rm(resolve, reject, () => {
           this.setStat(false);
+          clearTimeout(tickId);
           return !this.getStat();
         });
       })
@@ -193,7 +197,7 @@ export namespace loginCommon {
       // create a locker
       let locker = new Locker('./test.lock', isDebug, delayS * 1000, timeoutS * 1000);
       let count = 0, totalTime = timeoutS;
-      setTimeout(() => timeoutS = 0, timeoutS * 1000);
+      let tickId = setTimeout(() => timeoutS = 0, timeoutS * 1000);
 
       // try and retry access resource.
       // 0.check timeout  1.lock before invoke op()  2.retry if op() throw an exception  3.unlock at finally.
@@ -207,6 +211,7 @@ export namespace loginCommon {
           .then(async () => {
             await op()
               .then( (data) => { // then() when op() success.
+                clearTimeout(tickId);
                 return resolve(data)
               })
               .catch((error) => { // 2. retry if capture an exception.
@@ -348,4 +353,4 @@ export namespace loginCommon {
   }
 }
 
-loginCommon.customerLogin('T4', () => {});
+// loginCommon.customerLogin('T4', () => {});

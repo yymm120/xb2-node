@@ -317,3 +317,18 @@ test('test-block', async () => {
 })
 
 
+
+test('json1', async () => {
+  let a1 = {"email": "test@example.com", "password": "123123", "isUsed": "false"};
+  let a2 = {"email": "test@example.com", "password": "123123", "isUsed": "false"};
+  let a3 = {"email": "test@example.com", "password": "123123", "isUsed": "false"};
+  let a4 = {"email": "test@example.com", "password": "123123", "isUsed": "false"};
+  var T4 = [a1, a2, a3, a4]
+  var array1 = [1,2];
+  var array2 = {T4, array1}
+
+  await Locker.parallelAccessResourceOperation(() => {
+    var s = JSON.stringify(array2);
+    return fs.promises.writeFile('./writeJsonTest.json', s);
+  }, false, 5, 30);
+})

@@ -25,7 +25,6 @@ test('test-childProcess', () => {
     runTest.on('close', (data) => {
       console.log(`stdout: ${data}`);
     })
-    while (true){};
   }
 });
 
