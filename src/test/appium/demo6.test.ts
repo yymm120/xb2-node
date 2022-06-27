@@ -41,8 +41,8 @@ class Test<T> {
 }
 
 new Test<Class2>(new Class2())
-new Test<Class2>(new Class1())
-new Test<Class1>(new Class2());
+// new Test<Class2>(new Class1())
+// new Test<Class1>(new Class2());
 
 
 

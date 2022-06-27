@@ -23,8 +23,9 @@ program
 // .option('-ac --appium-config <appiumpath>', '')
 // .option('-dc --driver-config <driverpath>', '')
 
-
-
+program
+    .command('test-driver')
+    .option('-t --test')
 
 
 
@@ -242,6 +243,13 @@ export default async function runCli(): Promise<void> {
         let driver = conf.driver;
         let config = configUtil.cover(driver, conf.node1[0].clientConfig);
         let client = await remote(config)
+    }
+    if (program.commands[2] && program.commands[2].opts().test){
+        let child = exec("node ../cucumberParallel/task1.js", (error, stdout, stderr) => {
+            console.log(stdout)
+            console.log(error)
+            console.log(stderr)
+        })
     }
     return null;
 }

@@ -14,7 +14,8 @@
     "baseUrl": "./",
     "incremental": true
   },
-  "types" : ["node", "webdriverio/async"],
+
+  "types" : ["node", "webdriverio/async", "node-ts"],
   //  需要编译的文件
   "include": [
     "src/**/*"

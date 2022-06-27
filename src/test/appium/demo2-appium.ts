@@ -5,7 +5,7 @@
 
 
 
-let { remote } = require('webdriverio');
+// let { remote } = require('webdriverio');
 (async () => {
 
     const appDriver = await remote({

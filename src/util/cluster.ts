@@ -1,5 +1,5 @@
 const cluster = require('cluster');
-const http = require('http');
+// const http = require('http');
 const numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) { // 判断是否为主进程
