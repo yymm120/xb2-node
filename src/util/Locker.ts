@@ -61,7 +61,7 @@ export namespace runtimeUtils {
 
 
     export class Locker {
-        private stat: boolean = false;
+        private static stat: boolean = false;
         private static timeout: number = 999999;// ms
         private static delay: number = 1000;// ms
 
@@ -73,12 +73,12 @@ export namespace runtimeUtils {
             Locker.timeout = timout;
         };
 
-        public setStat(stat: boolean): void {
-            this.stat = stat
+        private static setStat(stat: boolean): void {
+            Locker.stat = stat
         };
 
-        public getStat(): boolean {
-            return this.stat
+        public static getStat(): boolean {
+            return Locker.stat
         };
 
 
@@ -90,14 +90,14 @@ export namespace runtimeUtils {
          * @param timeout eg. 180000ms
          */
         public async lock(delay: number = Locker.delay, timeout: number = Locker.timeout): Promise<boolean> {
-            if (this.getStat()) return this.getStat();
+            if (Locker.getStat()) return Locker.getStat();
             let count = 1, isDebug = this.isDebug, path = this.LOCAL_LOCK_FILE_PATH;
             let tickId = setTimeout(() => {
                 timeout = 0
             }, timeout)
 
             // mkdir
-            function mk(resolve, reject, callback) {
+            function mk(resolve, reject, setStat) {
                 if (timeout === 0) {   // 1. timout
                     reject('time out!')
                     return;
@@ -105,21 +105,20 @@ export namespace runtimeUtils {
                 try {
                     fs.mkdirSync(path)
                     isDebug ? log.info(`try lock ${count} times success.`) : null;
-                    callback();
+                    setStat();
                     clearTimeout(tickId);
                     return resolve('mkdir success!')
                 } catch (error) {
                     isDebug ? log.info(`retry lock ${++count} times, dir ${path} is already exist.`) : null;
                     return setTimeout(() => {
-                        mk(resolve, reject, callback)
+                        mk(resolve, reject, setStat)
                     }, delay);
                 }
             }
 
-            return new Promise((resolve, reject) => {
+            return new Promise(function (resolve, reject) {
                 mk(resolve, reject, () => {
-                    this.setStat(true);
-                    return this.getStat();
+                    Locker.setStat(true);
                 });
             })
 
@@ -133,7 +132,7 @@ export namespace runtimeUtils {
          * @param timeout {number} default is Lock. timeout
          */
         public async unlock(delay: number = Locker.delay, timeout: number = Locker.timeout): Promise<boolean> {
-            if (!this.getStat()) return !this.getStat();
+            if (!Locker.getStat()) return !Locker.getStat();
             let count = 1, isDebug = this.isDebug, path = this.LOCAL_LOCK_FILE_PATH;
             let tickId = setTimeout(() => {
                 timeout = 0
@@ -162,8 +161,8 @@ export namespace runtimeUtils {
             }
             return new Promise((resolve, reject) => {
                 rm(resolve, reject, () => {
-                    this.setStat(false);
-                    return !this.getStat();
+                    Locker.setStat(false);
+                    // return !this.getStat();
                 });
             })
         }
