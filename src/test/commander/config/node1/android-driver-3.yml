@@ -1,0 +1,8 @@
+# android-3 configuration
+# used: false
+driver:
+  port: 4727
+  capabilities:
+    deviceName: 127.0.0.1:5558
+    appPackage: 'com.ferguson.rnapp'
+    appActivity: 'com.ferguson.rnapp.MainActivity'

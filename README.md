@@ -1,4 +1,11 @@
-# 小白兔的开发之路
+
+## 本地开发
+
+### **1：把项目克隆到本地**
+
+```
+git clone https://github.com/ninghao/xb2-node.git
+```
 
 ## 生成密钥与公钥
 

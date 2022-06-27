@@ -1,0 +1,6 @@
+# android-1 configuration
+# used: false
+driver:
+  port: 4723
+  capabilities:
+    deviceName: 127.0.0.1:5554

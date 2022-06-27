@@ -1,0 +1,54 @@
+# used=false
+node: [0.0.0.0]
+parallel: 4
+appiumPorts: [4723, 4725, 4727, 4729] # declare ports
+emulatorDevices:
+  - deviceName: emulator-5554
+  - deviceName: emulator-5556
+  - deviceName: emulator-5558
+#  - deviceName: localhost:5560
+apps:  # declare apps
+  app1: {path: 'path/to/*.apk', appPackage: 'com.ferguson.rnapp', appActivity: 'com.ferguson.rnapp.MainActivity'}
+appiumServer:
+  runArgs:
+    - '--allow-cors' # allow cors
+    - '--session-override' # allow override
+    - '--address 0.0.0.0' # 0.0.0.0
+    - '--port 4723' # server port
+    - '--udid emulator-5556' # device name
+    - '--pre-launch' # auto run app, must set 'apk-pkg' and apk-activity'
+    - '--app-pkg com.ferguson.rnapp'
+    - '--app-activity MainActivity'
+appiumClientConfig:
+  path: '/wd/hub'
+  port: 4723        # won't take effect, see server-1~4
+  logLevel: 'info'
+  capabilities:
+    automationName: 'UIAutomator2'
+    platformName: 'Android'
+    platformVersion: '11'
+    deviceName: 127.0.0.1:5554    # won't take effect, see server-1~4
+    unicodeKeyboard: true
+    skipDeviceInitialization: false
+    skipServerInstallation: false
+    noReset: false
+    appPackage: 'com.ferguson.rnapp'
+    appActivity: 'com.ferguson.rnapp.MainActivity'
+    newCommandTimeout: 86400
+emulatorConfig:
+  runArgs:
+    - '-camera-back none' # disable camera
+    - '-camera-front none' # disable camera
+    - '-selinux permissive' # permissive modal
+    - '-no-snapshot-save' # quit not save snapshot
+    - '-memory 1024' #  memory size
+    - '-port 5554' # emulator port
+    - '-no-boot-anim' # disable boot animation
+    - '-no-audio' # disable audio driver
+    - '-no-window' # no window modal
+    - '@android-emulator-5554'
+  adbRunArgs:
+    install: 'path/to/*.apk' # path to *.apk
+  #    pull: ''
+  #    push: ''
+  #    forward: ''

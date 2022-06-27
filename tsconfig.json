@@ -14,7 +14,8 @@
     "baseUrl": "./",
     "incremental": true
   },
-//  需要编译的文件
+  "types" : ["node", "webdriverio/async"],
+  //  需要编译的文件
   "include": [
     "src/**/*"
   ],

@@ -1,8 +1,8 @@
 {
   "name": "xb2-node",
   "version": "1.0.0",
-  "description": "《小白兔的开发之路》演示项目",
-  "author": "wanghao <wanghao@ninghao.net>",
+  "description": "test",
+  "author": "xinhao <@xx.com>",
   "scripts": {
     "start:dev": "tsc-watch --onSuccess \"node dist/main.js\"",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -10,7 +10,12 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "appium": "^1.22.3",
+    "commander": "^9.3.0",
+    "express": "^4.17.1",
+    "wdio": "^6.0.1",
+    "webdriverio": "^7.20.2",
+    "yaml": "^2.1.1"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^8.1.2",
