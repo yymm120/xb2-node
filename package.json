@@ -10,8 +10,10 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "@types/cucumber": "^6.0.1",
     "appium": "^1.22.3",
     "commander": "^9.3.0",
+    "cucumber": "^6.0.5",
     "express": "^4.17.1",
     "wdio": "^6.0.1",
     "webdriverio": "^7.20.2",

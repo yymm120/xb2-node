@@ -66,8 +66,38 @@ test("testLocker1", async () => {
     }
 })
 
+import {default as Cli} from "cucumber/lib/cli";
+test("cucumber", async () => {
+    async function runCucumberInternally(): Promise<void> {
+        const cwd = process.cwd()
+        const cli: Cli = new Cli({
+            argv: process.argv,
+            cwd,
+            stdout: process.stdout,
+        });
+        console.log("process.argv: ", process.argv);
+        try {
+            await cli.run()
+        } catch (error) {
+        }
+    }
+    await runCucumberInternally();
+})
 
-test("test333", () => {
-    exec('')
+const {remote} = require('webdriverio')
+test("demo2", async () => {
+    const appDriver = await remote({
+        path:'/wd/hub',
+        port:4725,
+        capabilities: {
+            automationName: 'UIAutomator2',
+            platformName: 'Android',
+            platformVersion: '11',
+            deviceName: `127.0.0.1:5556`,
+            appPackage: 'com.ferguson.rnapp',
+            appActivity: 'com.ferguson.rnapp.MainActivity'
+        }
+    })
+    appDriver.$("id=com.ferguson.rnapp:id/action_bar_root");
 })
 

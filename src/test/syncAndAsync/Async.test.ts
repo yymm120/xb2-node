@@ -64,6 +64,10 @@ test('order?', () => {
 })
 
 
+test("sample1", () => {
+
+});
+
 test("sample asyn", () => {
   // sep1:
   console.log('1');
